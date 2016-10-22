@@ -51,13 +51,13 @@ def _readSLHAFile_with_comments(spcfile,ignorenomass=False,ignorenobr=True):
                     if spaces<0:
                         spaces=lspacesmin
                 
-                    IF.blocks[block].entries[int(entries[0])]='%s%s#%s' %(entries[1],' '*spaces,fline[1])
+                    IF.blocks[block].entries[int(entries[0])]='%s%s #%s' %(entries[1],' '*spaces,fline[1])
                 if len(entries)==3:
                     spaces=lspaces-len(entries[2])
                     if spaces<0:
                         spaces=lspacesmin
                     
-                    IF.blocks[block].entries[int(entries[0]),int(entries[1])]='%s%s#%s' %(entries[2],' '*spaces,fline[1])
+                    IF.blocks[block].entries[int(entries[0]),int(entries[1])]='%s%s #%s' %(entries[2],' '*spaces,fline[1])
     return IF
 
 def block_to_series(block):
@@ -84,8 +84,11 @@ class model(object):
     #FIX pdgs
     pdg['h0']=25;pdg['H0']=35;pdg['A0']=36;pdg['Hp']=37;pdg['Hm']=-37
     def __init__(self,MODEL='SM',ignorenobr=True,ignorenomass=True,updateSMINPUTS=False,\
-                SPHENO_PATH='../SPHENO',low=False):
-        spcfile='%s/%s/Input_Files/LesHouches.in.%s' %(SPHENO_PATH,MODEL,MODEL)
+                 SPHENO_PATH='../SPHENO',low=False,spc_input_file=None):
+        if spc_input_file:
+            spcfile=spc_input_file
+        else:
+            spcfile='%s/%s/Input_Files/LesHouches.in.%s' %(SPHENO_PATH,MODEL,MODEL)
         self.MODEL=MODEL
         self.low=''
         if low:
