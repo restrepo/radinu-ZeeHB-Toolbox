@@ -10,12 +10,18 @@ models="darkLR
 diphotonModels
 LR+DM
 tripletLR
+tripletLRDM
+radinert+RSIII
 radinert+T13A
 SM+HighScale
 Zee
 SimplifiedDM+IDM
 SimplifiedDM+SDFDM
 SimplifiedDM+TFDM
+radinert+T13A
+LRmodels+LRSSM
+LRmodels+tripletLRDM
+radinu+ZeeHB
 "
 Nm=$(echo "$models" | wc -l)
 models=$(echo "$models" |sed 's/+/::/g' | egrep  -v '^'"$MODEL"'$' | sed 's/::/+/g')
