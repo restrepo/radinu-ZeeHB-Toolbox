@@ -3,7 +3,7 @@
 ! SARAH References: arXiv:0806.0538, 0909.2863, 1002.0840, 1207.0906, 1309.7223  
 ! (c) Florian Staub, 2013  
 ! ------------------------------------------------------------------------------  
-! File created at 22:47 on 24.8.2016   
+! File created at 15:33 on 18.1.2017   
 ! ----------------------------------------------------------------------  
  
  
@@ -25,13 +25,13 @@ Contains
 
 
 Subroutine GToParameters160(g,g1,g2,g3,lam1,lam2,lam4,lam3,lam7,lam5,lam6,            & 
-& lam9,lam8,lamh,lam10,Yu,epsU,epsD,epsE,Yd,Ye,Yh,mu,mH2,mEt2,m12,mh)
+& lam9,lam8,lamh,lam10,epsU,Yu,epsD,epsE,Yd,Ye,Yh,mu,mH2,mEt2,m12,mh)
 
 Implicit None 
 Real(dp), Intent(in) :: g(160) 
 Real(dp),Intent(out) :: g1,g2,g3,lam5
 
-Complex(dp),Intent(out) :: lam1,lam2,lam4,lam3,lam7,lam6,lam9,lam8,lamh,lam10,Yu(3,3),epsU(3,3),epsD(3,3),       & 
+Complex(dp),Intent(out) :: lam1,lam2,lam4,lam3,lam7,lam6,lam9,lam8,lamh,lam10,epsU(3,3),Yu(3,3),epsD(3,3),       & 
 & epsE(3,3),Yd(3,3),Ye(3,3),Yh(3,3),mu,mH2,mEt2,m12,mh
 
 Integer i1, i2, i3, i4, SumI 
@@ -57,7 +57,7 @@ Do i1 = 1,3
 Do i2 = 1,3
 SumI = (i2-1) + (i1-1)*3
 SumI = SumI*2 
-Yu(i1,i2) = Cmplx( g(SumI+25), g(SumI+26), dp) 
+epsU(i1,i2) = Cmplx( g(SumI+25), g(SumI+26), dp) 
 End Do 
  End Do 
  
@@ -65,7 +65,7 @@ Do i1 = 1,3
 Do i2 = 1,3
 SumI = (i2-1) + (i1-1)*3
 SumI = SumI*2 
-epsU(i1,i2) = Cmplx( g(SumI+43), g(SumI+44), dp) 
+Yu(i1,i2) = Cmplx( g(SumI+43), g(SumI+44), dp) 
 End Do 
  End Do 
  
@@ -126,13 +126,13 @@ Iname = Iname - 1
 End Subroutine GToParameters160
 
 Subroutine ParametersToG160(g1,g2,g3,lam1,lam2,lam4,lam3,lam7,lam5,lam6,              & 
-& lam9,lam8,lamh,lam10,Yu,epsU,epsD,epsE,Yd,Ye,Yh,mu,mH2,mEt2,m12,mh,g)
+& lam9,lam8,lamh,lam10,epsU,Yu,epsD,epsE,Yd,Ye,Yh,mu,mH2,mEt2,m12,mh,g)
 
 Implicit None 
 Real(dp), Intent(out) :: g(160) 
 Real(dp), Intent(in) :: g1,g2,g3,lam5
 
-Complex(dp), Intent(in) :: lam1,lam2,lam4,lam3,lam7,lam6,lam9,lam8,lamh,lam10,Yu(3,3),epsU(3,3),epsD(3,3),       & 
+Complex(dp), Intent(in) :: lam1,lam2,lam4,lam3,lam7,lam6,lam9,lam8,lamh,lam10,epsU(3,3),Yu(3,3),epsD(3,3),       & 
 & epsE(3,3),Yd(3,3),Ye(3,3),Yh(3,3),mu,mH2,mEt2,m12,mh
 
 Integer i1, i2, i3, i4, SumI 
@@ -168,8 +168,8 @@ Do i1 = 1,3
 Do i2 = 1,3
 SumI = (i2-1) + (i1-1)*3
 SumI = SumI*2 
-g(SumI+25) = Real(Yu(i1,i2), dp) 
-g(SumI+26) = Aimag(Yu(i1,i2)) 
+g(SumI+25) = Real(epsU(i1,i2), dp) 
+g(SumI+26) = Aimag(epsU(i1,i2)) 
 End Do 
 End Do 
 
@@ -177,8 +177,8 @@ Do i1 = 1,3
 Do i2 = 1,3
 SumI = (i2-1) + (i1-1)*3
 SumI = SumI*2 
-g(SumI+43) = Real(epsU(i1,i2), dp) 
-g(SumI+44) = Aimag(epsU(i1,i2)) 
+g(SumI+43) = Real(Yu(i1,i2), dp) 
+g(SumI+44) = Aimag(Yu(i1,i2)) 
 End Do 
 End Do 
 
@@ -255,14 +255,14 @@ Complex(dp) :: lam1,betalam11,betalam12,Dlam1,lam2,betalam21,betalam22,         
 & Dlam2,lam4,betalam41,betalam42,Dlam4,lam3,betalam31,betalam32,Dlam3,lam7,              & 
 & betalam71,betalam72,Dlam7,lam6,betalam61,betalam62,Dlam6,lam9,betalam91,               & 
 & betalam92,Dlam9,lam8,betalam81,betalam82,Dlam8,lamh,betalamh1,betalamh2,               & 
-& Dlamh,lam10,betalam101,betalam102,Dlam10,Yu(3,3),betaYu1(3,3),betaYu2(3,3)             & 
-& ,DYu(3,3),adjYu(3,3),epsU(3,3),betaepsU1(3,3),betaepsU2(3,3),DepsU(3,3),               & 
-& adjepsU(3,3),epsD(3,3),betaepsD1(3,3),betaepsD2(3,3),DepsD(3,3),adjepsD(3,3)           & 
-& ,epsE(3,3),betaepsE1(3,3),betaepsE2(3,3),DepsE(3,3),adjepsE(3,3),Yd(3,3)               & 
-& ,betaYd1(3,3),betaYd2(3,3),DYd(3,3),adjYd(3,3),Ye(3,3),betaYe1(3,3),betaYe2(3,3)       & 
-& ,DYe(3,3),adjYe(3,3),Yh(3,3),betaYh1(3,3),betaYh2(3,3),DYh(3,3),adjYh(3,3)             & 
-& ,mu,betamu1,betamu2,Dmu,mH2,betamH21,betamH22,DmH2,mEt2,betamEt21,betamEt22,           & 
-& DmEt2,m12,betam121,betam122,Dm12,mh,betamh1,betamh2,Dmh
+& Dlamh,lam10,betalam101,betalam102,Dlam10,epsU(3,3),betaepsU1(3,3),betaepsU2(3,3)       & 
+& ,DepsU(3,3),adjepsU(3,3),Yu(3,3),betaYu1(3,3),betaYu2(3,3),DYu(3,3),adjYu(3,3)         & 
+& ,epsD(3,3),betaepsD1(3,3),betaepsD2(3,3),DepsD(3,3),adjepsD(3,3),epsE(3,3)             & 
+& ,betaepsE1(3,3),betaepsE2(3,3),DepsE(3,3),adjepsE(3,3),Yd(3,3),betaYd1(3,3)            & 
+& ,betaYd2(3,3),DYd(3,3),adjYd(3,3),Ye(3,3),betaYe1(3,3),betaYe2(3,3),DYe(3,3)           & 
+& ,adjYe(3,3),Yh(3,3),betaYh1(3,3),betaYh2(3,3),DYh(3,3),adjYh(3,3),mu,betamu1,          & 
+& betamu2,Dmu,mH2,betamH21,betamH22,DmH2,mEt2,betamEt21,betamEt22,DmEt2,m12,             & 
+& betam121,betam122,Dm12,mh,betamh1,betamh2,Dmh
 Iname = Iname +1 
 NameOfUnit(Iname) = 'rge160' 
  
@@ -270,10 +270,10 @@ OnlyDiagonal = .Not.GenerationMixing
 q = t 
  
 Call GToParameters160(gy,g1,g2,g3,lam1,lam2,lam4,lam3,lam7,lam5,lam6,lam9,            & 
-& lam8,lamh,lam10,Yu,epsU,epsD,epsE,Yd,Ye,Yh,mu,mH2,mEt2,m12,mh)
+& lam8,lamh,lam10,epsU,Yu,epsD,epsE,Yd,Ye,Yh,mu,mH2,mEt2,m12,mh)
 
-Call Adjungate(Yu,adjYu)
 Call Adjungate(epsU,adjepsU)
+Call Adjungate(Yu,adjYu)
 Call Adjungate(epsD,adjepsD)
 Call Adjungate(epsE,adjepsE)
 Call Adjungate(Yd,adjYd)
@@ -586,28 +586,6 @@ End If
 Call Chop(Dlam10) 
 
 !-------------------- 
-! Yu 
-!-------------------- 
- 
-betaYu1  = 0
-
- 
- 
-If (TwoLoopRGE) Then 
-betaYu2 = 0
-
- 
-DYu = oo16pi2*( betaYu1 + oo16pi2 * betaYu2 ) 
-
- 
-Else 
-DYu = oo16pi2* betaYu1 
-End If 
- 
- 
-Call Chop(DYu) 
-
-!-------------------- 
 ! epsU 
 !-------------------- 
  
@@ -628,6 +606,28 @@ End If
  
  
 Call Chop(DepsU) 
+
+!-------------------- 
+! Yu 
+!-------------------- 
+ 
+betaYu1  = 0
+
+ 
+ 
+If (TwoLoopRGE) Then 
+betaYu2 = 0
+
+ 
+DYu = oo16pi2*( betaYu1 + oo16pi2 * betaYu2 ) 
+
+ 
+Else 
+DYu = oo16pi2* betaYu1 
+End If 
+ 
+ 
+Call Chop(DYu) 
 
 !-------------------- 
 ! epsD 
@@ -850,7 +850,7 @@ End If
 Call Chop(Dmh) 
 
 Call ParametersToG160(Dg1,Dg2,Dg3,Dlam1,Dlam2,Dlam4,Dlam3,Dlam7,Dlam5,Dlam6,          & 
-& Dlam9,Dlam8,Dlamh,Dlam10,DYu,DepsU,DepsD,DepsE,DYd,DYe,DYh,Dmu,DmH2,DmEt2,             & 
+& Dlam9,Dlam8,Dlamh,Dlam10,DepsU,DYu,DepsD,DepsE,DYd,DYe,DYh,Dmu,DmH2,DmEt2,             & 
 & Dm12,Dmh,f)
 
 Iname = Iname - 1 
@@ -858,13 +858,13 @@ Iname = Iname - 1
 End Subroutine rge160  
 
 Subroutine GToParameters162(g,g1,g2,g3,lam1,lam2,lam4,lam3,lam7,lam5,lam6,            & 
-& lam9,lam8,lamh,lam10,Yu,epsU,epsD,epsE,Yd,Ye,Yh,mu,mH2,mEt2,m12,mh,v,vv)
+& lam9,lam8,lamh,lam10,epsU,Yu,epsD,epsE,Yd,Ye,Yh,mu,mH2,mEt2,m12,mh,v,vv)
 
 Implicit None 
 Real(dp), Intent(in) :: g(162) 
 Real(dp),Intent(out) :: g1,g2,g3,lam5,v,vv
 
-Complex(dp),Intent(out) :: lam1,lam2,lam4,lam3,lam7,lam6,lam9,lam8,lamh,lam10,Yu(3,3),epsU(3,3),epsD(3,3),       & 
+Complex(dp),Intent(out) :: lam1,lam2,lam4,lam3,lam7,lam6,lam9,lam8,lamh,lam10,epsU(3,3),Yu(3,3),epsD(3,3),       & 
 & epsE(3,3),Yd(3,3),Ye(3,3),Yh(3,3),mu,mH2,mEt2,m12,mh
 
 Integer i1, i2, i3, i4, SumI 
@@ -890,7 +890,7 @@ Do i1 = 1,3
 Do i2 = 1,3
 SumI = (i2-1) + (i1-1)*3
 SumI = SumI*2 
-Yu(i1,i2) = Cmplx( g(SumI+25), g(SumI+26), dp) 
+epsU(i1,i2) = Cmplx( g(SumI+25), g(SumI+26), dp) 
 End Do 
  End Do 
  
@@ -898,7 +898,7 @@ Do i1 = 1,3
 Do i2 = 1,3
 SumI = (i2-1) + (i1-1)*3
 SumI = SumI*2 
-epsU(i1,i2) = Cmplx( g(SumI+43), g(SumI+44), dp) 
+Yu(i1,i2) = Cmplx( g(SumI+43), g(SumI+44), dp) 
 End Do 
  End Do 
  
@@ -961,13 +961,13 @@ Iname = Iname - 1
 End Subroutine GToParameters162
 
 Subroutine ParametersToG162(g1,g2,g3,lam1,lam2,lam4,lam3,lam7,lam5,lam6,              & 
-& lam9,lam8,lamh,lam10,Yu,epsU,epsD,epsE,Yd,Ye,Yh,mu,mH2,mEt2,m12,mh,v,vv,g)
+& lam9,lam8,lamh,lam10,epsU,Yu,epsD,epsE,Yd,Ye,Yh,mu,mH2,mEt2,m12,mh,v,vv,g)
 
 Implicit None 
 Real(dp), Intent(out) :: g(162) 
 Real(dp), Intent(in) :: g1,g2,g3,lam5,v,vv
 
-Complex(dp), Intent(in) :: lam1,lam2,lam4,lam3,lam7,lam6,lam9,lam8,lamh,lam10,Yu(3,3),epsU(3,3),epsD(3,3),       & 
+Complex(dp), Intent(in) :: lam1,lam2,lam4,lam3,lam7,lam6,lam9,lam8,lamh,lam10,epsU(3,3),Yu(3,3),epsD(3,3),       & 
 & epsE(3,3),Yd(3,3),Ye(3,3),Yh(3,3),mu,mH2,mEt2,m12,mh
 
 Integer i1, i2, i3, i4, SumI 
@@ -1003,8 +1003,8 @@ Do i1 = 1,3
 Do i2 = 1,3
 SumI = (i2-1) + (i1-1)*3
 SumI = SumI*2 
-g(SumI+25) = Real(Yu(i1,i2), dp) 
-g(SumI+26) = Aimag(Yu(i1,i2)) 
+g(SumI+25) = Real(epsU(i1,i2), dp) 
+g(SumI+26) = Aimag(epsU(i1,i2)) 
 End Do 
 End Do 
 
@@ -1012,8 +1012,8 @@ Do i1 = 1,3
 Do i2 = 1,3
 SumI = (i2-1) + (i1-1)*3
 SumI = SumI*2 
-g(SumI+43) = Real(epsU(i1,i2), dp) 
-g(SumI+44) = Aimag(epsU(i1,i2)) 
+g(SumI+43) = Real(Yu(i1,i2), dp) 
+g(SumI+44) = Aimag(Yu(i1,i2)) 
 End Do 
 End Do 
 
@@ -1092,14 +1092,14 @@ Complex(dp) :: lam1,betalam11,betalam12,Dlam1,lam2,betalam21,betalam22,         
 & Dlam2,lam4,betalam41,betalam42,Dlam4,lam3,betalam31,betalam32,Dlam3,lam7,              & 
 & betalam71,betalam72,Dlam7,lam6,betalam61,betalam62,Dlam6,lam9,betalam91,               & 
 & betalam92,Dlam9,lam8,betalam81,betalam82,Dlam8,lamh,betalamh1,betalamh2,               & 
-& Dlamh,lam10,betalam101,betalam102,Dlam10,Yu(3,3),betaYu1(3,3),betaYu2(3,3)             & 
-& ,DYu(3,3),adjYu(3,3),epsU(3,3),betaepsU1(3,3),betaepsU2(3,3),DepsU(3,3),               & 
-& adjepsU(3,3),epsD(3,3),betaepsD1(3,3),betaepsD2(3,3),DepsD(3,3),adjepsD(3,3)           & 
-& ,epsE(3,3),betaepsE1(3,3),betaepsE2(3,3),DepsE(3,3),adjepsE(3,3),Yd(3,3)               & 
-& ,betaYd1(3,3),betaYd2(3,3),DYd(3,3),adjYd(3,3),Ye(3,3),betaYe1(3,3),betaYe2(3,3)       & 
-& ,DYe(3,3),adjYe(3,3),Yh(3,3),betaYh1(3,3),betaYh2(3,3),DYh(3,3),adjYh(3,3)             & 
-& ,mu,betamu1,betamu2,Dmu,mH2,betamH21,betamH22,DmH2,mEt2,betamEt21,betamEt22,           & 
-& DmEt2,m12,betam121,betam122,Dm12,mh,betamh1,betamh2,Dmh
+& Dlamh,lam10,betalam101,betalam102,Dlam10,epsU(3,3),betaepsU1(3,3),betaepsU2(3,3)       & 
+& ,DepsU(3,3),adjepsU(3,3),Yu(3,3),betaYu1(3,3),betaYu2(3,3),DYu(3,3),adjYu(3,3)         & 
+& ,epsD(3,3),betaepsD1(3,3),betaepsD2(3,3),DepsD(3,3),adjepsD(3,3),epsE(3,3)             & 
+& ,betaepsE1(3,3),betaepsE2(3,3),DepsE(3,3),adjepsE(3,3),Yd(3,3),betaYd1(3,3)            & 
+& ,betaYd2(3,3),DYd(3,3),adjYd(3,3),Ye(3,3),betaYe1(3,3),betaYe2(3,3),DYe(3,3)           & 
+& ,adjYe(3,3),Yh(3,3),betaYh1(3,3),betaYh2(3,3),DYh(3,3),adjYh(3,3),mu,betamu1,          & 
+& betamu2,Dmu,mH2,betamH21,betamH22,DmH2,mEt2,betamEt21,betamEt22,DmEt2,m12,             & 
+& betam121,betam122,Dm12,mh,betamh1,betamh2,Dmh
 Iname = Iname +1 
 NameOfUnit(Iname) = 'rge162' 
  
@@ -1107,10 +1107,10 @@ OnlyDiagonal = .Not.GenerationMixing
 q = t 
  
 Call GToParameters162(gy,g1,g2,g3,lam1,lam2,lam4,lam3,lam7,lam5,lam6,lam9,            & 
-& lam8,lamh,lam10,Yu,epsU,epsD,epsE,Yd,Ye,Yh,mu,mH2,mEt2,m12,mh,v,vv)
+& lam8,lamh,lam10,epsU,Yu,epsD,epsE,Yd,Ye,Yh,mu,mH2,mEt2,m12,mh,v,vv)
 
-Call Adjungate(Yu,adjYu)
 Call Adjungate(epsU,adjepsU)
+Call Adjungate(Yu,adjYu)
 Call Adjungate(epsD,adjepsD)
 Call Adjungate(epsE,adjepsE)
 Call Adjungate(Yd,adjYd)
@@ -1423,28 +1423,6 @@ End If
 Call Chop(Dlam10) 
 
 !-------------------- 
-! Yu 
-!-------------------- 
- 
-betaYu1  = 0
-
- 
- 
-If (TwoLoopRGE) Then 
-betaYu2 = 0
-
- 
-DYu = oo16pi2*( betaYu1 + oo16pi2 * betaYu2 ) 
-
- 
-Else 
-DYu = oo16pi2* betaYu1 
-End If 
- 
- 
-Call Chop(DYu) 
-
-!-------------------- 
 ! epsU 
 !-------------------- 
  
@@ -1465,6 +1443,28 @@ End If
  
  
 Call Chop(DepsU) 
+
+!-------------------- 
+! Yu 
+!-------------------- 
+ 
+betaYu1  = 0
+
+ 
+ 
+If (TwoLoopRGE) Then 
+betaYu2 = 0
+
+ 
+DYu = oo16pi2*( betaYu1 + oo16pi2 * betaYu2 ) 
+
+ 
+Else 
+DYu = oo16pi2* betaYu1 
+End If 
+ 
+ 
+Call Chop(DYu) 
 
 !-------------------- 
 ! epsD 
@@ -1727,7 +1727,7 @@ End If
  
  
 Call ParametersToG162(Dg1,Dg2,Dg3,Dlam1,Dlam2,Dlam4,Dlam3,Dlam7,Dlam5,Dlam6,          & 
-& Dlam9,Dlam8,Dlamh,Dlam10,DYu,DepsU,DepsD,DepsE,DYd,DYe,DYh,Dmu,DmH2,DmEt2,             & 
+& Dlam9,Dlam8,Dlamh,Dlam10,DepsU,DYu,DepsD,DepsE,DYd,DYe,DYh,Dmu,DmH2,DmEt2,             & 
 & Dm12,Dmh,Dv,Dvv,f)
 
 Iname = Iname - 1 

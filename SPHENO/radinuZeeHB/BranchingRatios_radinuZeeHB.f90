@@ -3,7 +3,7 @@
 ! SARAH References: arXiv:0806.0538, 0909.2863, 1002.0840, 1207.0906, 1309.7223  
 ! (c) Florian Staub, 2013  
 ! ------------------------------------------------------------------------------  
-! File created at 22:47 on 24.8.2016   
+! File created at 15:33 on 18.1.2017   
 ! ----------------------------------------------------------------------  
  
  
@@ -24,7 +24,7 @@ Use TreeLevelDecays_radinuZeeHB
 Subroutine CalculateBR(CTBD,fac3,epsI,deltaM,kont,MAh,MAh2,MetI,MetI2,MFd,            & 
 & MFd2,MFe,MFe2,MFu,MFu2,MFv,MFv2,Mhh,Mhh2,MHm,MHm2,MVWp,MVWp2,MVZ,MVZ2,TW,              & 
 & ZDR,ZER,ZUR,ZDL,ZEL,ZUL,UV,ZH,ZP,ZW,ZZ,alphaH,v,vv,g1,g2,g3,lam1,lam2,lam4,            & 
-& lam3,lam7,lam5,lam6,lam9,lam8,lamh,lam10,Yu,epsU,epsD,epsE,Yd,Ye,Yh,mu,mH2,            & 
+& lam3,lam7,lam5,lam6,lam9,lam8,lamh,lam10,epsU,Yu,epsD,epsE,Yd,Ye,Yh,mu,mH2,            & 
 & mEt2,m12,mh,gPFu,gTFu,BRFu,gPFe,gTFe,BRFe,gPFd,gTFd,BRFd,gPFv,gTFv,BRFv,               & 
 & gPVZ,gTVZ,BRVZ,gPVWp,gTVWp,BRVWp,gPhh,gThh,BRhh,gPHm,gTHm,BRHm,gPetI,gTetI,BRetI)
 
@@ -33,7 +33,7 @@ Integer, Intent(inout) :: kont
 Logical, Intent(in) :: CTBD 
 Real(dp),Intent(in) :: g1,g2,g3,lam5
 
-Complex(dp),Intent(in) :: lam1,lam2,lam4,lam3,lam7,lam6,lam9,lam8,lamh,lam10,Yu(3,3),epsU(3,3),epsD(3,3),       & 
+Complex(dp),Intent(in) :: lam1,lam2,lam4,lam3,lam7,lam6,lam9,lam8,lamh,lam10,epsU(3,3),Yu(3,3),epsD(3,3),       & 
 & epsE(3,3),Yd(3,3),Ye(3,3),Yh(3,3),mu,mH2,mEt2,m12,mh
 
 Real(dp),Intent(in) :: MAh,MAh2,MetI,MetI2,MFd(3),MFd2(3),MFe(3),MFe2(3),MFu(3),MFu2(3),MFv(3),              & 
@@ -72,7 +72,7 @@ BRFu = 0._dp
 Call FuTwoBodyDecay(-1,DeltaM,MAh,MAh2,MetI,MetI2,MFd,MFd2,MFe,MFe2,MFu,              & 
 & MFu2,MFv,MFv2,Mhh,Mhh2,MHm,MHm2,MVWp,MVWp2,MVZ,MVZ2,TW,ZDR,ZER,ZUR,ZDL,ZEL,            & 
 & ZUL,UV,ZH,ZP,ZW,ZZ,alphaH,g1,g2,g3,lam1,lam2,lam4,lam3,lam7,lam5,lam6,lam9,            & 
-& lam8,lamh,lam10,Yu,epsU,epsD,epsE,Yd,Ye,Yh,mu,mH2,mEt2,m12,mh,v,vv,gPFu(:,1:21)        & 
+& lam8,lamh,lam10,epsU,Yu,epsD,epsE,Yd,Ye,Yh,mu,mH2,mEt2,m12,mh,v,vv,gPFu(:,1:21)        & 
 & ,gTFu,BRFu(:,1:21))
 
 Do i1=1,3
@@ -87,7 +87,7 @@ BRFe = 0._dp
 Call FeTwoBodyDecay(-1,DeltaM,MAh,MAh2,MetI,MetI2,MFd,MFd2,MFe,MFe2,MFu,              & 
 & MFu2,MFv,MFv2,Mhh,Mhh2,MHm,MHm2,MVWp,MVWp2,MVZ,MVZ2,TW,ZDR,ZER,ZUR,ZDL,ZEL,            & 
 & ZUL,UV,ZH,ZP,ZW,ZZ,alphaH,g1,g2,g3,lam1,lam2,lam4,lam3,lam7,lam5,lam6,lam9,            & 
-& lam8,lamh,lam10,Yu,epsU,epsD,epsE,Yd,Ye,Yh,mu,mH2,mEt2,m12,mh,v,vv,gPFe(:,1:21)        & 
+& lam8,lamh,lam10,epsU,Yu,epsD,epsE,Yd,Ye,Yh,mu,mH2,mEt2,m12,mh,v,vv,gPFe(:,1:21)        & 
 & ,gTFe,BRFe(:,1:21))
 
 Do i1=1,3
@@ -102,7 +102,7 @@ BRFd = 0._dp
 Call FdTwoBodyDecay(-1,DeltaM,MAh,MAh2,MetI,MetI2,MFd,MFd2,MFe,MFe2,MFu,              & 
 & MFu2,MFv,MFv2,Mhh,Mhh2,MHm,MHm2,MVWp,MVWp2,MVZ,MVZ2,TW,ZDR,ZER,ZUR,ZDL,ZEL,            & 
 & ZUL,UV,ZH,ZP,ZW,ZZ,alphaH,g1,g2,g3,lam1,lam2,lam4,lam3,lam7,lam5,lam6,lam9,            & 
-& lam8,lamh,lam10,Yu,epsU,epsD,epsE,Yd,Ye,Yh,mu,mH2,mEt2,m12,mh,v,vv,gPFd(:,1:21)        & 
+& lam8,lamh,lam10,epsU,Yu,epsD,epsE,Yd,Ye,Yh,mu,mH2,mEt2,m12,mh,v,vv,gPFd(:,1:21)        & 
 & ,gTFd,BRFd(:,1:21))
 
 Do i1=1,3
@@ -117,7 +117,7 @@ BRFv = 0._dp
 Call FvTwoBodyDecay(-1,DeltaM,MAh,MAh2,MetI,MetI2,MFd,MFd2,MFe,MFe2,MFu,              & 
 & MFu2,MFv,MFv2,Mhh,Mhh2,MHm,MHm2,MVWp,MVWp2,MVZ,MVZ2,TW,ZDR,ZER,ZUR,ZDL,ZEL,            & 
 & ZUL,UV,ZH,ZP,ZW,ZZ,alphaH,g1,g2,g3,lam1,lam2,lam4,lam3,lam7,lam5,lam6,lam9,            & 
-& lam8,lamh,lam10,Yu,epsU,epsD,epsE,Yd,Ye,Yh,mu,mH2,mEt2,m12,mh,v,vv,gPFv,               & 
+& lam8,lamh,lam10,epsU,Yu,epsD,epsE,Yd,Ye,Yh,mu,mH2,mEt2,m12,mh,v,vv,gPFv,               & 
 & gTFv,BRFv)
 
 gPVZ = 0._dp 
@@ -126,7 +126,7 @@ BRVZ = 0._dp
 Call VZTwoBodyDecay(-1,DeltaM,MAh,MAh2,MetI,MetI2,MFd,MFd2,MFe,MFe2,MFu,              & 
 & MFu2,MFv,MFv2,Mhh,Mhh2,MHm,MHm2,MVWp,MVWp2,MVZ,MVZ2,TW,ZDR,ZER,ZUR,ZDL,ZEL,            & 
 & ZUL,UV,ZH,ZP,ZW,ZZ,alphaH,g1,g2,g3,lam1,lam2,lam4,lam3,lam7,lam5,lam6,lam9,            & 
-& lam8,lamh,lam10,Yu,epsU,epsD,epsE,Yd,Ye,Yh,mu,mH2,mEt2,m12,mh,v,vv,gPVZ,               & 
+& lam8,lamh,lam10,epsU,Yu,epsD,epsE,Yd,Ye,Yh,mu,mH2,mEt2,m12,mh,v,vv,gPVZ,               & 
 & gTVZ,BRVZ)
 
 ! Set Goldstone Widhts 
@@ -138,7 +138,7 @@ BRVWp = 0._dp
 Call VWpTwoBodyDecay(-1,DeltaM,MAh,MAh2,MetI,MetI2,MFd,MFd2,MFe,MFe2,MFu,             & 
 & MFu2,MFv,MFv2,Mhh,Mhh2,MHm,MHm2,MVWp,MVWp2,MVZ,MVZ2,TW,ZDR,ZER,ZUR,ZDL,ZEL,            & 
 & ZUL,UV,ZH,ZP,ZW,ZZ,alphaH,g1,g2,g3,lam1,lam2,lam4,lam3,lam7,lam5,lam6,lam9,            & 
-& lam8,lamh,lam10,Yu,epsU,epsD,epsE,Yd,Ye,Yh,mu,mH2,mEt2,m12,mh,v,vv,gPVWp,              & 
+& lam8,lamh,lam10,epsU,Yu,epsD,epsE,Yd,Ye,Yh,mu,mH2,mEt2,m12,mh,v,vv,gPVWp,              & 
 & gTVWp,BRVWp)
 
 ! Set Goldstone Widhts 
@@ -151,7 +151,7 @@ BRhh = 0._dp
 Call hhTwoBodyDecay(-1,DeltaM,MAh,MAh2,MetI,MetI2,MFd,MFd2,MFe,MFe2,MFu,              & 
 & MFu2,MFv,MFv2,Mhh,Mhh2,MHm,MHm2,MVWp,MVWp2,MVZ,MVZ2,TW,ZDR,ZER,ZUR,ZDL,ZEL,            & 
 & ZUL,UV,ZH,ZP,ZW,ZZ,alphaH,g1,g2,g3,lam1,lam2,lam4,lam3,lam7,lam5,lam6,lam9,            & 
-& lam8,lamh,lam10,Yu,epsU,epsD,epsE,Yd,Ye,Yh,mu,mH2,mEt2,m12,mh,v,vv,gPhh,               & 
+& lam8,lamh,lam10,epsU,Yu,epsD,epsE,Yd,Ye,Yh,mu,mH2,mEt2,m12,mh,v,vv,gPhh,               & 
 & gThh,BRhh)
 
 gPHm = 0._dp 
@@ -160,7 +160,7 @@ BRHm = 0._dp
 Call HmTwoBodyDecay(-1,DeltaM,MAh,MAh2,MetI,MetI2,MFd,MFd2,MFe,MFe2,MFu,              & 
 & MFu2,MFv,MFv2,Mhh,Mhh2,MHm,MHm2,MVWp,MVWp2,MVZ,MVZ2,TW,ZDR,ZER,ZUR,ZDL,ZEL,            & 
 & ZUL,UV,ZH,ZP,ZW,ZZ,alphaH,g1,g2,g3,lam1,lam2,lam4,lam3,lam7,lam5,lam6,lam9,            & 
-& lam8,lamh,lam10,Yu,epsU,epsD,epsE,Yd,Ye,Yh,mu,mH2,mEt2,m12,mh,v,vv,gPHm,               & 
+& lam8,lamh,lam10,epsU,Yu,epsD,epsE,Yd,Ye,Yh,mu,mH2,mEt2,m12,mh,v,vv,gPHm,               & 
 & gTHm,BRHm)
 
 ! Set Goldstone Widhts 
@@ -173,7 +173,7 @@ BRetI = 0._dp
 Call etITwoBodyDecay(-1,DeltaM,MAh,MAh2,MetI,MetI2,MFd,MFd2,MFe,MFe2,MFu,             & 
 & MFu2,MFv,MFv2,Mhh,Mhh2,MHm,MHm2,MVWp,MVWp2,MVZ,MVZ2,TW,ZDR,ZER,ZUR,ZDL,ZEL,            & 
 & ZUL,UV,ZH,ZP,ZW,ZZ,alphaH,g1,g2,g3,lam1,lam2,lam4,lam3,lam7,lam5,lam6,lam9,            & 
-& lam8,lamh,lam10,Yu,epsU,epsD,epsE,Yd,Ye,Yh,mu,mH2,mEt2,m12,mh,v,vv,gPetI,              & 
+& lam8,lamh,lam10,epsU,Yu,epsD,epsE,Yd,Ye,Yh,mu,mH2,mEt2,m12,mh,v,vv,gPetI,              & 
 & gTetI,BRetI)
 
 If (.Not.CTBD) Then 
@@ -182,7 +182,7 @@ If (MaxVal(gTFu).Lt.MaxVal(fac3*Abs(MFu))) Then
 Call FuThreeBodyDecay(-1,MAh,MAh2,MetI,MetI2,MFd,MFd2,MFe,MFe2,MFu,MFu2,              & 
 & MFv,MFv2,Mhh,Mhh2,MHm,MHm2,MVWp,MVWp2,MVZ,MVZ2,TW,ZDR,ZER,ZUR,ZDL,ZEL,ZUL,             & 
 & UV,ZH,ZP,ZW,ZZ,alphaH,g1,g2,g3,lam1,lam2,lam4,lam3,lam7,lam5,lam6,lam9,lam8,           & 
-& lamh,lam10,Yu,epsU,epsD,epsE,Yd,Ye,Yh,mu,mH2,mEt2,m12,mh,v,vv,gTetI,gThh,              & 
+& lamh,lam10,epsU,Yu,epsD,epsE,Yd,Ye,Yh,mu,mH2,mEt2,m12,mh,v,vv,gTetI,gThh,              & 
 & gTHm,gTVWp,gTVZ,gFuFucFdFd,gFuFucFeFe,gFuFucFuFu,gFuFdcFeFv,gFuFuFvFv,epsI,            & 
 & deltaM,.False.,gTFu,gPFu(:,22:156),BRFu(:,22:156))
 
@@ -190,7 +190,7 @@ Else
 Call FuThreeBodyDecay(-1,MAh,MAh2,MetI,MetI2,MFd,MFd2,MFe,MFe2,MFu,MFu2,              & 
 & MFv,MFv2,Mhh,Mhh2,MHm,MHm2,MVWp,MVWp2,MVZ,MVZ2,TW,ZDR,ZER,ZUR,ZDL,ZEL,ZUL,             & 
 & UV,ZH,ZP,ZW,ZZ,alphaH,g1,g2,g3,lam1,lam2,lam4,lam3,lam7,lam5,lam6,lam9,lam8,           & 
-& lamh,lam10,Yu,epsU,epsD,epsE,Yd,Ye,Yh,mu,mH2,mEt2,m12,mh,v,vv,gTetI,gThh,              & 
+& lamh,lam10,epsU,Yu,epsD,epsE,Yd,Ye,Yh,mu,mH2,mEt2,m12,mh,v,vv,gTetI,gThh,              & 
 & gTHm,gTVWp,gTVZ,gFuFucFdFd,gFuFucFeFe,gFuFucFuFu,gFuFdcFeFv,gFuFuFvFv,epsI,            & 
 & deltaM,.True.,gTFu,gPFu(:,22:156),BRFu(:,22:156))
 
@@ -201,7 +201,7 @@ Else
 Call FuThreeBodyDecay(-1,MAh,MAh2,MetI,MetI2,MFd,MFd2,MFe,MFe2,MFu,MFu2,              & 
 & MFv,MFv2,Mhh,Mhh2,MHm,MHm2,MVWp,MVWp2,MVZ,MVZ2,TW,ZDR,ZER,ZUR,ZDL,ZEL,ZUL,             & 
 & UV,ZH,ZP,ZW,ZZ,alphaH,g1,g2,g3,lam1,lam2,lam4,lam3,lam7,lam5,lam6,lam9,lam8,           & 
-& lamh,lam10,Yu,epsU,epsD,epsE,Yd,Ye,Yh,mu,mH2,mEt2,m12,mh,v,vv,gTetI,gThh,              & 
+& lamh,lam10,epsU,Yu,epsD,epsE,Yd,Ye,Yh,mu,mH2,mEt2,m12,mh,v,vv,gTetI,gThh,              & 
 & gTHm,gTVWp,gTVZ,gFuFucFdFd,gFuFucFeFe,gFuFucFuFu,gFuFdcFeFv,gFuFuFvFv,epsI,            & 
 & deltaM,.False.,gTFu,gPFu(:,22:156),BRFu(:,22:156))
 
@@ -218,7 +218,7 @@ If (MaxVal(gTFe).Lt.MaxVal(fac3*Abs(MFe))) Then
 Call FeThreeBodyDecay(-1,MAh,MAh2,MetI,MetI2,MFd,MFd2,MFe,MFe2,MFu,MFu2,              & 
 & MFv,MFv2,Mhh,Mhh2,MHm,MHm2,MVWp,MVWp2,MVZ,MVZ2,TW,ZDR,ZER,ZUR,ZDL,ZEL,ZUL,             & 
 & UV,ZH,ZP,ZW,ZZ,alphaH,g1,g2,g3,lam1,lam2,lam4,lam3,lam7,lam5,lam6,lam9,lam8,           & 
-& lamh,lam10,Yu,epsU,epsD,epsE,Yd,Ye,Yh,mu,mH2,mEt2,m12,mh,v,vv,gTetI,gThh,              & 
+& lamh,lam10,epsU,Yu,epsD,epsE,Yd,Ye,Yh,mu,mH2,mEt2,m12,mh,v,vv,gTetI,gThh,              & 
 & gTHm,gTVWp,gTVZ,gFeFecFdFd,gFeFecFeFe,gFeFecFuFu,gFeFeFvFv,gFeFvcFuFd,epsI,            & 
 & deltaM,.False.,gTFe,gPFe(:,22:156),BRFe(:,22:156))
 
@@ -226,7 +226,7 @@ Else
 Call FeThreeBodyDecay(-1,MAh,MAh2,MetI,MetI2,MFd,MFd2,MFe,MFe2,MFu,MFu2,              & 
 & MFv,MFv2,Mhh,Mhh2,MHm,MHm2,MVWp,MVWp2,MVZ,MVZ2,TW,ZDR,ZER,ZUR,ZDL,ZEL,ZUL,             & 
 & UV,ZH,ZP,ZW,ZZ,alphaH,g1,g2,g3,lam1,lam2,lam4,lam3,lam7,lam5,lam6,lam9,lam8,           & 
-& lamh,lam10,Yu,epsU,epsD,epsE,Yd,Ye,Yh,mu,mH2,mEt2,m12,mh,v,vv,gTetI,gThh,              & 
+& lamh,lam10,epsU,Yu,epsD,epsE,Yd,Ye,Yh,mu,mH2,mEt2,m12,mh,v,vv,gTetI,gThh,              & 
 & gTHm,gTVWp,gTVZ,gFeFecFdFd,gFeFecFeFe,gFeFecFuFu,gFeFeFvFv,gFeFvcFuFd,epsI,            & 
 & deltaM,.True.,gTFe,gPFe(:,22:156),BRFe(:,22:156))
 
@@ -237,7 +237,7 @@ Else
 Call FeThreeBodyDecay(-1,MAh,MAh2,MetI,MetI2,MFd,MFd2,MFe,MFe2,MFu,MFu2,              & 
 & MFv,MFv2,Mhh,Mhh2,MHm,MHm2,MVWp,MVWp2,MVZ,MVZ2,TW,ZDR,ZER,ZUR,ZDL,ZEL,ZUL,             & 
 & UV,ZH,ZP,ZW,ZZ,alphaH,g1,g2,g3,lam1,lam2,lam4,lam3,lam7,lam5,lam6,lam9,lam8,           & 
-& lamh,lam10,Yu,epsU,epsD,epsE,Yd,Ye,Yh,mu,mH2,mEt2,m12,mh,v,vv,gTetI,gThh,              & 
+& lamh,lam10,epsU,Yu,epsD,epsE,Yd,Ye,Yh,mu,mH2,mEt2,m12,mh,v,vv,gTetI,gThh,              & 
 & gTHm,gTVWp,gTVZ,gFeFecFdFd,gFeFecFeFe,gFeFecFuFu,gFeFeFvFv,gFeFvcFuFd,epsI,            & 
 & deltaM,.False.,gTFe,gPFe(:,22:156),BRFe(:,22:156))
 
@@ -254,7 +254,7 @@ If (MaxVal(gTFd).Lt.MaxVal(fac3*Abs(MFd))) Then
 Call FdThreeBodyDecay(-1,MAh,MAh2,MetI,MetI2,MFd,MFd2,MFe,MFe2,MFu,MFu2,              & 
 & MFv,MFv2,Mhh,Mhh2,MHm,MHm2,MVWp,MVWp2,MVZ,MVZ2,TW,ZDR,ZER,ZUR,ZDL,ZEL,ZUL,             & 
 & UV,ZH,ZP,ZW,ZZ,alphaH,g1,g2,g3,lam1,lam2,lam4,lam3,lam7,lam5,lam6,lam9,lam8,           & 
-& lamh,lam10,Yu,epsU,epsD,epsE,Yd,Ye,Yh,mu,mH2,mEt2,m12,mh,v,vv,gTetI,gThh,              & 
+& lamh,lam10,epsU,Yu,epsD,epsE,Yd,Ye,Yh,mu,mH2,mEt2,m12,mh,v,vv,gTetI,gThh,              & 
 & gTHm,gTVWp,gTVZ,gFdFdcFdFd,gFdFdcFeFe,gFdFdcFuFu,gFdFdFvFv,gFdFuFvFe,epsI,             & 
 & deltaM,.False.,gTFd,gPFd(:,22:156),BRFd(:,22:156))
 
@@ -262,7 +262,7 @@ Else
 Call FdThreeBodyDecay(-1,MAh,MAh2,MetI,MetI2,MFd,MFd2,MFe,MFe2,MFu,MFu2,              & 
 & MFv,MFv2,Mhh,Mhh2,MHm,MHm2,MVWp,MVWp2,MVZ,MVZ2,TW,ZDR,ZER,ZUR,ZDL,ZEL,ZUL,             & 
 & UV,ZH,ZP,ZW,ZZ,alphaH,g1,g2,g3,lam1,lam2,lam4,lam3,lam7,lam5,lam6,lam9,lam8,           & 
-& lamh,lam10,Yu,epsU,epsD,epsE,Yd,Ye,Yh,mu,mH2,mEt2,m12,mh,v,vv,gTetI,gThh,              & 
+& lamh,lam10,epsU,Yu,epsD,epsE,Yd,Ye,Yh,mu,mH2,mEt2,m12,mh,v,vv,gTetI,gThh,              & 
 & gTHm,gTVWp,gTVZ,gFdFdcFdFd,gFdFdcFeFe,gFdFdcFuFu,gFdFdFvFv,gFdFuFvFe,epsI,             & 
 & deltaM,.True.,gTFd,gPFd(:,22:156),BRFd(:,22:156))
 
@@ -273,7 +273,7 @@ Else
 Call FdThreeBodyDecay(-1,MAh,MAh2,MetI,MetI2,MFd,MFd2,MFe,MFe2,MFu,MFu2,              & 
 & MFv,MFv2,Mhh,Mhh2,MHm,MHm2,MVWp,MVWp2,MVZ,MVZ2,TW,ZDR,ZER,ZUR,ZDL,ZEL,ZUL,             & 
 & UV,ZH,ZP,ZW,ZZ,alphaH,g1,g2,g3,lam1,lam2,lam4,lam3,lam7,lam5,lam6,lam9,lam8,           & 
-& lamh,lam10,Yu,epsU,epsD,epsE,Yd,Ye,Yh,mu,mH2,mEt2,m12,mh,v,vv,gTetI,gThh,              & 
+& lamh,lam10,epsU,Yu,epsD,epsE,Yd,Ye,Yh,mu,mH2,mEt2,m12,mh,v,vv,gTetI,gThh,              & 
 & gTHm,gTVWp,gTVZ,gFdFdcFdFd,gFdFdcFeFe,gFdFdcFuFu,gFdFdFvFv,gFdFuFvFe,epsI,             & 
 & deltaM,.False.,gTFd,gPFd(:,22:156),BRFd(:,22:156))
 

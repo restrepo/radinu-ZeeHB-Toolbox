@@ -3,7 +3,7 @@
 ! SARAH References: arXiv:0806.0538, 0909.2863, 1002.0840, 1207.0906, 1309.7223  
 ! (c) Florian Staub, 2013  
 ! ------------------------------------------------------------------------------  
-! File created at 22:50 on 24.8.2016   
+! File created at 15:36 on 18.1.2017   
 ! ----------------------------------------------------------------------  
  
  
@@ -20,13 +20,13 @@ Contains
 
 
 Subroutine SolveTadpoleEquations(g1,g2,g3,lam1,lam2,lam4,lam3,lam7,lam5,              & 
-& lam6,lam9,lam8,lamh,lam10,Yu,epsU,epsD,epsE,Yd,Ye,Yh,mu,mH2,mEt2,m12,mh,               & 
+& lam6,lam9,lam8,lamh,lam10,epsU,Yu,epsD,epsE,Yd,Ye,Yh,mu,mH2,mEt2,m12,mh,               & 
 & v,vv,Tad1Loop)
 
 Implicit None
 Real(dp),Intent(inout) :: g1,g2,g3,lam5,v,vv
 
-Complex(dp),Intent(inout) :: lam1,lam2,lam4,lam3,lam7,lam6,lam9,lam8,lamh,lam10,Yu(3,3),epsU(3,3),epsD(3,3),       & 
+Complex(dp),Intent(inout) :: lam1,lam2,lam4,lam3,lam7,lam6,lam9,lam8,lamh,lam10,epsU(3,3),Yu(3,3),epsD(3,3),       & 
 & epsE(3,3),Yd(3,3),Ye(3,3),Yh(3,3),mu,mH2,mEt2,m12,mh
 
 Complex(dp), Intent(in) :: Tad1Loop(2)
@@ -100,12 +100,12 @@ End If
 End Subroutine SolveTadpoleEquations
 
 Subroutine CalculateTadpoles(g1,g2,g3,lam1,lam2,lam4,lam3,lam7,lam5,lam6,             & 
-& lam9,lam8,lamh,lam10,Yu,epsU,epsD,epsE,Yd,Ye,Yh,mu,mH2,mEt2,m12,mh,v,vv,               & 
+& lam9,lam8,lamh,lam10,epsU,Yu,epsD,epsE,Yd,Ye,Yh,mu,mH2,mEt2,m12,mh,v,vv,               & 
 & Tad1Loop,TadpoleValues)
 
 Real(dp),Intent(in) :: g1,g2,g3,lam5,v,vv
 
-Complex(dp),Intent(in) :: lam1,lam2,lam4,lam3,lam7,lam6,lam9,lam8,lamh,lam10,Yu(3,3),epsU(3,3),epsD(3,3),       & 
+Complex(dp),Intent(in) :: lam1,lam2,lam4,lam3,lam7,lam6,lam9,lam8,lamh,lam10,epsU(3,3),Yu(3,3),epsD(3,3),       & 
 & epsE(3,3),Yd(3,3),Ye(3,3),Yh(3,3),mu,mH2,mEt2,m12,mh
 
 Complex(dp), Intent(in) :: Tad1Loop(2)

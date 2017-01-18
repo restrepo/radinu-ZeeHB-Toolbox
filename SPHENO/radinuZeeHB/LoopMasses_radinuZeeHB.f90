@@ -3,7 +3,7 @@
 ! SARAH References: arXiv:0806.0538, 0909.2863, 1002.0840, 1207.0906, 1309.7223  
 ! (c) Florian Staub, 2013  
 ! ------------------------------------------------------------------------------  
-! File created at 22:47 on 24.8.2016   
+! File created at 15:33 on 18.1.2017   
 ! ----------------------------------------------------------------------  
  
  
@@ -35,12 +35,12 @@ Contains
 Subroutine OneLoopMasses(MAh,MAh2,MetI,MetI2,MFd,MFd2,MFe,MFe2,MFu,MFu2,              & 
 & MFv,MFv2,Mhh,Mhh2,MHm,MHm2,MVWp,MVWp2,MVZ,MVZ2,TW,ZDR,ZER,ZUR,ZDL,ZEL,ZUL,             & 
 & UV,ZH,ZP,ZW,ZZ,alphaH,v,vv,g1,g2,g3,lam1,lam2,lam4,lam3,lam7,lam5,lam6,lam9,           & 
-& lam8,lamh,lam10,Yu,epsU,epsD,epsE,Yd,Ye,Yh,mu,mH2,mEt2,m12,mh,kont)
+& lam8,lamh,lam10,epsU,Yu,epsD,epsE,Yd,Ye,Yh,mu,mH2,mEt2,m12,mh,kont)
 
 Implicit None 
 Real(dp),Intent(inout) :: g1,g2,g3,lam5
 
-Complex(dp),Intent(inout) :: lam1,lam2,lam4,lam3,lam7,lam6,lam9,lam8,lamh,lam10,Yu(3,3),epsU(3,3),epsD(3,3),       & 
+Complex(dp),Intent(inout) :: lam1,lam2,lam4,lam3,lam7,lam6,lam9,lam8,lamh,lam10,epsU(3,3),Yu(3,3),epsD(3,3),       & 
 & epsE(3,3),Yd(3,3),Ye(3,3),Yh(3,3),mu,mH2,mEt2,m12,mh
 
 Real(dp),Intent(inout) :: MAh,MAh2,MetI,MetI2,MFd(3),MFd2(3),MFe(3),MFe2(3),MFu(3),MFu2(3),MFv(3),              & 
@@ -116,7 +116,7 @@ RXiZ = RXi
 Call TreeMasses(MAh,MAh2,MetI,MetI2,MFd,MFd2,MFe,MFe2,MFu,MFu2,MFv,MFv2,              & 
 & Mhh,Mhh2,MHm,MHm2,MVWp,MVWp2,MVZ,MVZ2,TW,ZDR,ZER,ZUR,ZDL,ZEL,ZUL,UV,ZH,ZP,             & 
 & ZW,ZZ,alphaH,v,vv,g1,g2,g3,lam1,lam2,lam4,lam3,lam7,lam5,lam6,lam9,lam8,               & 
-& lamh,lam10,Yu,epsU,epsD,epsE,Yd,Ye,Yh,mu,mH2,mEt2,m12,mh,GenerationMixing,kont)
+& lamh,lam10,epsU,Yu,epsD,epsE,Yd,Ye,Yh,mu,mH2,mEt2,m12,mh,GenerationMixing,kont)
 
 m12Tree  = m12
 mH2Tree  = mH2
@@ -145,16 +145,16 @@ Call Pi1LoopVZ(mZ2,Mhh,Mhh2,MAh,MAh2,MetI,MetI2,MFd,MFd2,MFe,MFe2,MFu,MFu2,     
 vev2=4._dp*Real(mZ2+dmz2,dp)/(g1**2+g2**2) -2*vv**2 
 vSM=sqrt(vev2) 
 Call SolveTadpoleEquations(g1,g2,g3,lam1,lam2,lam4,lam3,lam7,lam5,lam6,               & 
-& lam9,lam8,lamh,lam10,Yu,epsU,epsD,epsE,Yd,Ye,Yh,mu,mH2,mEt2,m12,mh,v,vv,               & 
+& lam9,lam8,lamh,lam10,epsU,Yu,epsD,epsE,Yd,Ye,Yh,mu,mH2,mEt2,m12,mh,v,vv,               & 
 & (/ ZeroC, ZeroC /))
 
 Call TreeMasses(MAh,MAh2,MetI,MetI2,MFd,MFd2,MFe,MFe2,MFu,MFu2,MFv,MFv2,              & 
 & Mhh,Mhh2,MHm,MHm2,MVWp,MVWp2,MVZ,MVZ2,TW,ZDR,ZER,ZUR,ZDL,ZEL,ZUL,UV,ZH,ZP,             & 
 & ZW,ZZ,alphaH,v,vv,g1,g2,g3,lam1,lam2,lam4,lam3,lam7,lam5,lam6,lam9,lam8,               & 
-& lamh,lam10,Yu,epsU,epsD,epsE,Yd,Ye,Yh,mu,mH2,mEt2,m12,mh,GenerationMixing,kont)
+& lamh,lam10,epsU,Yu,epsD,epsE,Yd,Ye,Yh,mu,mH2,mEt2,m12,mh,GenerationMixing,kont)
 
 Call CouplingsForLoopMasses(lam1,lam4,lam3,lam5,lam6,v,vv,lam7,ZH,g1,g2,              & 
-& TW,lam2,epsD,Yd,ZDL,ZDR,epsE,Ye,ZEL,ZER,Yu,epsU,ZUL,ZUR,lam9,lam8,mu,lam10,            & 
+& TW,lam2,epsD,Yd,ZDL,ZDR,epsE,Ye,ZEL,ZER,epsU,Yu,ZUL,ZUR,lam9,lam8,mu,lam10,            & 
 & ZP,Yh,UV,lamh,g3,cplAhAhUhh,cplAhetIUhh,cplAhUhhhh,cplAhUhhVZ,cpletIetIUhh,            & 
 & cpletIUhhhh,cpletIUhhVZ,cplcFdFdUhhL,cplcFdFdUhhR,cplcFeFeUhhL,cplcFeFeUhhR,           & 
 & cplcFuFuUhhL,cplcFuFuUhhR,cplcgWpgWpUhh,cplcgWCgWCUhh,cplcgZgZUhh,cplUhhhhhh,          & 
@@ -197,7 +197,7 @@ Call OneLoopTadpoleshh(v,vv,MAh,MAh2,MetI,MetI2,MFd,MFd2,MFe,MFe2,MFu,MFu2,     
 m12Tree  = m12
 mH2Tree  = mH2
 Call SolveTadpoleEquations(g1,g2,g3,lam1,lam2,lam4,lam3,lam7,lam5,lam6,               & 
-& lam9,lam8,lamh,lam10,Yu,epsU,epsD,epsE,Yd,Ye,Yh,mu,mH2,mEt2,m12,mh,v,vv,Tad1Loop)
+& lam9,lam8,lamh,lam10,epsU,Yu,epsD,epsE,Yd,Ye,Yh,mu,mH2,mEt2,m12,mh,v,vv,Tad1Loop)
 
 m121L = m12
 mH21L = mH2
@@ -2339,7 +2339,7 @@ SigS = oo16pi2*SigS
  
 End Subroutine Sigma1LoopFd 
  
-Subroutine OneLoopFu(Yu,epsU,v,vv,MFu,MFu2,MAh,MAh2,MetI,MetI2,MVWp,MVWp2,            & 
+Subroutine OneLoopFu(epsU,Yu,v,vv,MFu,MFu2,MAh,MAh2,MetI,MetI2,MVWp,MVWp2,            & 
 & MFd,MFd2,MHm,MHm2,Mhh,Mhh2,MVZ,MVZ2,cplcUFuFuAhL,cplcUFuFuAhR,cplcUFuFuetIL,           & 
 & cplcUFuFuetIR,cplcUFuFdcVWpL,cplcUFuFdcVWpR,cplcUFuFdHmL,cplcUFuFdHmR,cplcUFuFuhhL,    & 
 & cplcUFuFuhhR,cplcUFuFuVGL,cplcUFuFuVGR,cplcUFuFuVPL,cplcUFuFuVPR,cplcUFuFuVZL,         & 
@@ -2351,7 +2351,7 @@ Real(dp), Intent(in) :: MFu(3),MFu2(3),MAh,MAh2,MetI,MetI2,MVWp,MVWp2,MFd(3),MFd
 
 Real(dp), Intent(in) :: v,vv
 
-Complex(dp), Intent(in) :: Yu(3,3),epsU(3,3)
+Complex(dp), Intent(in) :: epsU(3,3),Yu(3,3)
 
 Complex(dp), Intent(in) :: cplcUFuFuAhL(3,3),cplcUFuFuAhR(3,3),cplcUFuFuetIL(3,3),cplcUFuFuetIR(3,3),            & 
 & cplcUFuFdcVWpL(3,3),cplcUFuFdcVWpR(3,3),cplcUFuFdHmL(3,3,3),cplcUFuFdHmR(3,3,3),       & 
@@ -2379,32 +2379,32 @@ Complex(dp) :: ZUL2(3,3), ZUR2(3,3)
 NameOfUnit(Iname) = 'OneLoopMFu'
  
 mat1a(1,1) = 0._dp 
-mat1a(1,1) = mat1a(1,1)+(v*epsU(1,1))/sqrt(2._dp)
-mat1a(1,1) = mat1a(1,1)+(vv*Yu(1,1))/sqrt(2._dp)
+mat1a(1,1) = mat1a(1,1)+(vv*epsU(1,1))/sqrt(2._dp)
+mat1a(1,1) = mat1a(1,1)+(v*Yu(1,1))/sqrt(2._dp)
 mat1a(1,2) = 0._dp 
-mat1a(1,2) = mat1a(1,2)+(v*epsU(2,1))/sqrt(2._dp)
-mat1a(1,2) = mat1a(1,2)+(vv*Yu(2,1))/sqrt(2._dp)
+mat1a(1,2) = mat1a(1,2)+(vv*epsU(2,1))/sqrt(2._dp)
+mat1a(1,2) = mat1a(1,2)+(v*Yu(2,1))/sqrt(2._dp)
 mat1a(1,3) = 0._dp 
-mat1a(1,3) = mat1a(1,3)+(v*epsU(3,1))/sqrt(2._dp)
-mat1a(1,3) = mat1a(1,3)+(vv*Yu(3,1))/sqrt(2._dp)
+mat1a(1,3) = mat1a(1,3)+(vv*epsU(3,1))/sqrt(2._dp)
+mat1a(1,3) = mat1a(1,3)+(v*Yu(3,1))/sqrt(2._dp)
 mat1a(2,1) = 0._dp 
-mat1a(2,1) = mat1a(2,1)+(v*epsU(1,2))/sqrt(2._dp)
-mat1a(2,1) = mat1a(2,1)+(vv*Yu(1,2))/sqrt(2._dp)
+mat1a(2,1) = mat1a(2,1)+(vv*epsU(1,2))/sqrt(2._dp)
+mat1a(2,1) = mat1a(2,1)+(v*Yu(1,2))/sqrt(2._dp)
 mat1a(2,2) = 0._dp 
-mat1a(2,2) = mat1a(2,2)+(v*epsU(2,2))/sqrt(2._dp)
-mat1a(2,2) = mat1a(2,2)+(vv*Yu(2,2))/sqrt(2._dp)
+mat1a(2,2) = mat1a(2,2)+(vv*epsU(2,2))/sqrt(2._dp)
+mat1a(2,2) = mat1a(2,2)+(v*Yu(2,2))/sqrt(2._dp)
 mat1a(2,3) = 0._dp 
-mat1a(2,3) = mat1a(2,3)+(v*epsU(3,2))/sqrt(2._dp)
-mat1a(2,3) = mat1a(2,3)+(vv*Yu(3,2))/sqrt(2._dp)
+mat1a(2,3) = mat1a(2,3)+(vv*epsU(3,2))/sqrt(2._dp)
+mat1a(2,3) = mat1a(2,3)+(v*Yu(3,2))/sqrt(2._dp)
 mat1a(3,1) = 0._dp 
-mat1a(3,1) = mat1a(3,1)+(v*epsU(1,3))/sqrt(2._dp)
-mat1a(3,1) = mat1a(3,1)+(vv*Yu(1,3))/sqrt(2._dp)
+mat1a(3,1) = mat1a(3,1)+(vv*epsU(1,3))/sqrt(2._dp)
+mat1a(3,1) = mat1a(3,1)+(v*Yu(1,3))/sqrt(2._dp)
 mat1a(3,2) = 0._dp 
-mat1a(3,2) = mat1a(3,2)+(v*epsU(2,3))/sqrt(2._dp)
-mat1a(3,2) = mat1a(3,2)+(vv*Yu(2,3))/sqrt(2._dp)
+mat1a(3,2) = mat1a(3,2)+(vv*epsU(2,3))/sqrt(2._dp)
+mat1a(3,2) = mat1a(3,2)+(v*Yu(2,3))/sqrt(2._dp)
 mat1a(3,3) = 0._dp 
-mat1a(3,3) = mat1a(3,3)+(v*epsU(3,3))/sqrt(2._dp)
-mat1a(3,3) = mat1a(3,3)+(vv*Yu(3,3))/sqrt(2._dp)
+mat1a(3,3) = mat1a(3,3)+(vv*epsU(3,3))/sqrt(2._dp)
+mat1a(3,3) = mat1a(3,3)+(v*Yu(3,3))/sqrt(2._dp)
 
  
  Do il=3,1,-1
@@ -2797,25 +2797,25 @@ mat1a(1,1) = 0._dp
 mat1a(1,1) = mat1a(1,1)-((vv*epsE(1,1))/sqrt(2._dp))
 mat1a(1,1) = mat1a(1,1)-((v*Ye(1,1))/sqrt(2._dp))
 mat1a(1,2) = 0._dp 
-mat1a(1,2) = mat1a(1,2)-((vv*epsE(2,1))/sqrt(2._dp))
+mat1a(1,2) = mat1a(1,2)-((vv*epsE(1,2))/sqrt(2._dp))
 mat1a(1,2) = mat1a(1,2)-((v*Ye(2,1))/sqrt(2._dp))
 mat1a(1,3) = 0._dp 
-mat1a(1,3) = mat1a(1,3)-((vv*epsE(3,1))/sqrt(2._dp))
+mat1a(1,3) = mat1a(1,3)-((vv*epsE(1,3))/sqrt(2._dp))
 mat1a(1,3) = mat1a(1,3)-((v*Ye(3,1))/sqrt(2._dp))
 mat1a(2,1) = 0._dp 
-mat1a(2,1) = mat1a(2,1)-((vv*epsE(1,2))/sqrt(2._dp))
+mat1a(2,1) = mat1a(2,1)-((vv*epsE(2,1))/sqrt(2._dp))
 mat1a(2,1) = mat1a(2,1)-((v*Ye(1,2))/sqrt(2._dp))
 mat1a(2,2) = 0._dp 
 mat1a(2,2) = mat1a(2,2)-((vv*epsE(2,2))/sqrt(2._dp))
 mat1a(2,2) = mat1a(2,2)-((v*Ye(2,2))/sqrt(2._dp))
 mat1a(2,3) = 0._dp 
-mat1a(2,3) = mat1a(2,3)-((vv*epsE(3,2))/sqrt(2._dp))
+mat1a(2,3) = mat1a(2,3)-((vv*epsE(2,3))/sqrt(2._dp))
 mat1a(2,3) = mat1a(2,3)-((v*Ye(3,2))/sqrt(2._dp))
 mat1a(3,1) = 0._dp 
-mat1a(3,1) = mat1a(3,1)-((vv*epsE(1,3))/sqrt(2._dp))
+mat1a(3,1) = mat1a(3,1)-((vv*epsE(3,1))/sqrt(2._dp))
 mat1a(3,1) = mat1a(3,1)-((v*Ye(1,3))/sqrt(2._dp))
 mat1a(3,2) = 0._dp 
-mat1a(3,2) = mat1a(3,2)-((vv*epsE(2,3))/sqrt(2._dp))
+mat1a(3,2) = mat1a(3,2)-((vv*epsE(3,2))/sqrt(2._dp))
 mat1a(3,2) = mat1a(3,2)-((v*Ye(2,3))/sqrt(2._dp))
 mat1a(3,3) = 0._dp 
 mat1a(3,3) = mat1a(3,3)-((vv*epsE(3,3))/sqrt(2._dp))

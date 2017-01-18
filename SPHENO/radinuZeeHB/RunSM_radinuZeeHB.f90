@@ -3,7 +3,7 @@
 ! SARAH References: arXiv:0806.0538, 0909.2863, 1002.0840, 1207.0906, 1309.7223  
 ! (c) Florian Staub, 2013  
 ! ------------------------------------------------------------------------------  
-! File created at 22:50 on 24.8.2016   
+! File created at 15:36 on 18.1.2017   
 ! ----------------------------------------------------------------------  
  
  
@@ -21,21 +21,21 @@ Contains
  
  Subroutine RunSM_and_SUSY_RGEs(Qout,g1input,g2input,g3input,lam1input,lam2input,      & 
 & lam4input,lam3input,lam7input,lam5input,lam6input,lam9input,lam8input,lamhinput,       & 
-& lam10input,Yuinput,epsUinput,epsDinput,epsEinput,Ydinput,Yeinput,Yhinput,              & 
+& lam10input,epsUinput,Yuinput,epsDinput,epsEinput,Ydinput,Yeinput,Yhinput,              & 
 & muinput,mH2input,mEt2input,m12input,mhinput,vinput,vvinput,g1,g2,g3,lam1,              & 
-& lam2,lam4,lam3,lam7,lam5,lam6,lam9,lam8,lamh,lam10,Yu,epsU,epsD,epsE,Yd,               & 
+& lam2,lam4,lam3,lam7,lam5,lam6,lam9,lam8,lamh,lam10,epsU,Yu,epsD,epsE,Yd,               & 
 & Ye,Yh,mu,mH2,mEt2,m12,mh,v,vv,CKMout,sinW2_out,Alpha_out,AlphaS_out,realCKM)
 
 Implicit None 
 Real(dp),Intent(in) :: g1input,g2input,g3input,lam5input,vinput,vvinput
 
 Complex(dp),Intent(in) :: lam1input,lam2input,lam4input,lam3input,lam7input,lam6input,lam9input,lam8input,      & 
-& lamhinput,lam10input,Yuinput(3,3),epsUinput(3,3),epsDinput(3,3),epsEinput(3,3),        & 
+& lamhinput,lam10input,epsUinput(3,3),Yuinput(3,3),epsDinput(3,3),epsEinput(3,3),        & 
 & Ydinput(3,3),Yeinput(3,3),Yhinput(3,3),muinput,mH2input,mEt2input,m12input,mhinput
 
 Real(dp),Intent(out) :: g1,g2,g3,lam5,v,vv
 
-Complex(dp),Intent(out) :: lam1,lam2,lam4,lam3,lam7,lam6,lam9,lam8,lamh,lam10,Yu(3,3),epsU(3,3),epsD(3,3),       & 
+Complex(dp),Intent(out) :: lam1,lam2,lam4,lam3,lam7,lam6,lam9,lam8,lamh,lam10,epsU(3,3),Yu(3,3),epsD(3,3),       & 
 & epsE(3,3),Yd(3,3),Ye(3,3),Yh(3,3),mu,mH2,mEt2,m12,mh
 
 Real(dp), Intent(in) :: Qout 
@@ -56,11 +56,11 @@ Qin=sqrt(getRenormalizationScale())
 scale_save = Qin 
 Call ParametersToG162(g1input,g2input,g3input,lam1input,lam2input,lam4input,          & 
 & lam3input,lam7input,lam5input,lam6input,lam9input,lam8input,lamhinput,lam10input,      & 
-& Yuinput,epsUinput,epsDinput,epsEinput,Ydinput,Yeinput,Yhinput,muinput,mH2input,        & 
+& epsUinput,Yuinput,epsDinput,epsEinput,Ydinput,Yeinput,Yhinput,muinput,mH2input,        & 
 & mEt2input,m12input,mhinput,vinput,vvinput,g1D)
 
 Call GToParameters162(g1D,g1,g2,g3,lam1,lam2,lam4,lam3,lam7,lam5,lam6,lam9,           & 
-& lam8,lamh,lam10,Yu,epsU,epsD,epsE,Yd,Ye,Yh,mu,mH2,mEt2,m12,mh,v,vv)
+& lam8,lamh,lam10,epsU,Yu,epsD,epsE,Yd,Ye,Yh,mu,mH2,mEt2,m12,mh,v,vv)
 
 g1 = Sqrt(3._dp/5._dp)*g1 
 

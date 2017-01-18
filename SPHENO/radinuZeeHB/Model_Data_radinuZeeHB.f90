@@ -3,7 +3,7 @@
 ! SARAH References: arXiv:0806.0538, 0909.2863, 1002.0840, 1207.0906, 1309.7223  
 ! (c) Florian Staub, 2013  
 ! ------------------------------------------------------------------------------  
-! File created at 22:47 on 24.8.2016   
+! File created at 15:33 on 18.1.2017   
 ! ----------------------------------------------------------------------  
  
  
@@ -266,25 +266,25 @@ Integer :: SolutionTadpoleNr = 1
 Character(len=15)::HighScaleModel
 Real(dp) :: g1,g2,g3,lam5
 
-Complex(dp) :: lam1,lam2,lam4,lam3,lam7,lam6,lam9,lam8,lamh,lam10,Yu(3,3),epsU(3,3),epsD(3,3),       & 
+Complex(dp) :: lam1,lam2,lam4,lam3,lam7,lam6,lam9,lam8,lamh,lam10,epsU(3,3),Yu(3,3),epsD(3,3),       & 
 & epsE(3,3),Yd(3,3),Ye(3,3),Yh(3,3),mu,mH2,mEt2,m12,mh
 
 Real(dp) :: g1IN,g2IN,g3IN,lam5IN
 
 Complex(dp) :: lam1IN,lam2IN,lam4IN,lam3IN,lam7IN,lam6IN,lam9IN,lam8IN,lamhIN,lam10IN,               & 
-& YuIN(3,3),epsUIN(3,3),epsDIN(3,3),epsEIN(3,3),YdIN(3,3),YeIN(3,3),YhIN(3,3),           & 
+& epsUIN(3,3),YuIN(3,3),epsDIN(3,3),epsEIN(3,3),YdIN(3,3),YeIN(3,3),YhIN(3,3),           & 
 & muIN,mH2IN,mEt2IN,m12IN,mhIN
 
 Real(dp) :: g1MZ,g2MZ,g3MZ,lam5MZ
 
 Complex(dp) :: lam1MZ,lam2MZ,lam4MZ,lam3MZ,lam7MZ,lam6MZ,lam9MZ,lam8MZ,lamhMZ,lam10MZ,               & 
-& YuMZ(3,3),epsUMZ(3,3),epsDMZ(3,3),epsEMZ(3,3),YdMZ(3,3),YeMZ(3,3),YhMZ(3,3),           & 
+& epsUMZ(3,3),YuMZ(3,3),epsDMZ(3,3),epsEMZ(3,3),YdMZ(3,3),YeMZ(3,3),YhMZ(3,3),           & 
 & muMZ,mH2MZ,mEt2MZ,m12MZ,mhMZ
 
 Real(dp) :: g1GUT,g2GUT,g3GUT,lam5GUT
 
 Complex(dp) :: lam1GUT,lam2GUT,lam4GUT,lam3GUT,lam7GUT,lam6GUT,lam9GUT,lam8GUT,lamhGUT,              & 
-& lam10GUT,YuGUT(3,3),epsUGUT(3,3),epsDGUT(3,3),epsEGUT(3,3),YdGUT(3,3),YeGUT(3,3),      & 
+& lam10GUT,epsUGUT(3,3),YuGUT(3,3),epsDGUT(3,3),epsEGUT(3,3),YdGUT(3,3),YeGUT(3,3),      & 
 & YhGUT(3,3),muGUT,mH2GUT,mEt2GUT,m12GUT,mhGUT
 
 Real(dp) :: MAh,MAh2,MetI,MetI2,MFd(3),MFd2(3),MFe(3),MFe2(3),MFu(3),MFu2(3),MFv(3),              & 
@@ -356,8 +356,8 @@ Logical, save :: InputValueforlam9 =.False.
 Logical, save :: InputValueforlam8 =.False. 
 Logical, save :: InputValueforlamh =.False. 
 Logical, save :: InputValueforlam10 =.False. 
-Logical, save :: InputValueforYu =.False. 
 Logical, save :: InputValueforepsU =.False. 
+Logical, save :: InputValueforYu =.False. 
 Logical, save :: InputValueforepsD =.False. 
 Logical, save :: InputValueforepsE =.False. 
 Logical, save :: InputValueforYd =.False. 
@@ -1016,8 +1016,8 @@ lam9IN = 0._dp
 lam8IN = 0._dp 
 lamhIN = 0._dp 
 lam10IN = 0._dp 
-YuIN = 0._dp 
 epsUIN = 0._dp 
+YuIN = 0._dp 
 epsDIN = 0._dp 
 epsEIN = 0._dp 
 YdIN = 0._dp 
@@ -1056,10 +1056,10 @@ lamh = 0._dp
 lamhMZ = 0._dp 
 lam10 = 0._dp 
 lam10MZ = 0._dp 
-Yu = 0._dp 
-YuMZ = 0._dp 
 epsU = 0._dp 
 epsUMZ = 0._dp 
+Yu = 0._dp 
+YuMZ = 0._dp 
 epsD = 0._dp 
 epsDMZ = 0._dp 
 epsE = 0._dp 
