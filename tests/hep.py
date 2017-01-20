@@ -8,6 +8,20 @@ import sys
 from cmdlike import *
 import pdg_series
 
+def _append_ssp(spcfile='SPheno.spc.radinert',sspfile='SPheno.ssp.radinert',):
+    try: 
+        f=open(spcfile, 'r')
+    except : # whatever reader errors you care about
+        sys.exit('LesHouches file not found')
+    fspc=f.readlines()
+    if os.path.exists(sspfile):
+        fssp=open(sspfile, 'a')
+    else:
+        fssp=open(sspfile, 'w')
+    fssp.writelines(fspc)
+    fssp.write('ENDOFPARAMETERFILE\n')
+    fssp.close()
+    f.close()
 #expanda pyslha
 def _init_LHA(blocks=['NAME1','NAME2']):
     dblocks=pyslha._dict('Blocks')
@@ -60,13 +74,16 @@ def _readSLHAFile_with_comments(spcfile,ignorenomass=False,ignorenobr=True):
                     IF.blocks[block].entries[int(entries[0]),int(entries[1])]='%s%s #%s' %(entries[2],' '*spaces,fline[1])
     return IF
 
-def block_to_series(block):
+def block_to_series(block,simplify_key=True):
     bs={}
     vk=[ re.sub('\s+','',l).split('#') for l in block.entries.values()]
     for i in vk:
         if len(i)>1:
-            key=re.sub('[^A-Za-z0-9]','',i[1])
-            key=re.sub('Input$','',key)
+            key=i[1]
+            if simplify_key:
+                key=re.sub('[^A-Za-z0-9]','',key)
+                key=re.sub('Input$','',key)
+                
             bs[key]=eval(i[0])
 
     return pd.Series(bs)
@@ -156,7 +173,7 @@ class hep(model):
         self.Br={} #branchings
         
 
-    def runSPheno(self,LHA=None,DEBUG=False):
+    def runSPheno(self,LHA=None,SSP=False,DEBUG=False):
         """
         Set self.config for PATHS. 
         Using defatull SARAH Toolbox SPHENO command. 
@@ -205,6 +222,10 @@ class hep(model):
             self.LHA_out=False
             self.LHA_out_with_comments=False
 
+        #CREATES SSP file: TODO: add new block in micromegas_output()
+        if SSP:
+            _append_ssp('SPheno.spc.%s' %self.MODEL,'SPheno.ssp.%s' %self.MODEL)
+            
         self.to_series() #Fill to_Series pandas Series    
         return self.LHA_out
         
